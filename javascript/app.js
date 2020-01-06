@@ -9,6 +9,8 @@ const MedianCutRunner = require("./median-cut-runner.js");
 const MedianCutPlotter = require("./median-cut-plotter.js");
 const KMeansRunner = require("./kmeans-runner.js");
 const KMeansPlotter = require("./kmeans-plotter.js");
+const KMeansHSVRunner = require("./kmeansHSV-runner.js");
+const KMeansHSVPlotter = require("./kmeansHSV-plotter.js");
 
 // Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -23,6 +25,7 @@ function handleFileSelect(evt) {
   $("#histogram-output").hide();
   $("#median-cut-output").hide();
   $("#kmeans-output").hide();
+  $("#kmeansHSV-output").hide();
 
   var file = evt.target.files[0];
 
@@ -150,6 +153,22 @@ function runKMeans(){
   $("#kmeans-output").show();
 }
 
+
+function runKMeansHSV(){
+  removePaletteTable("#kmeansHSV-palette");
+  $("#kmeansHSV-output").hide();
+  var kMeansInputValue = parseInt($("#kmeansHSV-input").val());
+
+  let kmeansRunner = new KMeansRunner();
+  let result = kmeansRunner.run(kMeansInputValue, pixels);
+
+  let kmeansPlotter = new KMeansPlotter();
+  kmeansPlotter.plot("kmeansHSV-plot", result.clusters);
+  PaletteTableWriter.drawPaletteTable("#kmeansHSV-palette", result.clusters);
+
+  $("#kmeansHSV-output").show();
+}
+
 function removePaletteTable(containerId) {
   $(containerId).empty();
 }
@@ -205,4 +224,5 @@ $(document).ready(() => {
   $("#run-histogram").click(runHistogram);
   $("#run-median-cut").click(runMedianCut);
   $("#run-kmeans").click(runKMeans);
+  $("#run-kmeansHSV").click(runKMeansHSV);
 });

@@ -2,12 +2,12 @@ const ImageUtil = require("./image-util.js");
 
 const RERUN_COUNT = 10;
 
-class KMeansRunner {
+class KMeansHSVRunner {
 
   run(k, pixels) {
     var clusters = null;
     var error = Infinity;
-    console.log("HELLO OLD");
+    console.log("HELLO");
     // re-run several times and keep the best result
     for(var attempt=0; attempt < RERUN_COUNT; attempt++) {
       let result = this.cluster(pixels, k);
@@ -52,7 +52,7 @@ class KMeansRunner {
     return _.map(groups, (group) => {
       let averageColor = ImageUtil.computeAverageColor(group);
       return {
-        red: averageColor.red,
+        red: averageColor.green,
         green: averageColor.green,
         blue: averageColor.blue
       };
@@ -109,4 +109,4 @@ class KMeansRunner {
 
 }
 
-module.exports = KMeansRunner;
+module.exports = KMeansHSVRunner;
