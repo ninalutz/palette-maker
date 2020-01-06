@@ -54,7 +54,7 @@ class KMeansHSVRunner {
       return {
         red: averageColor.green,
         green: averageColor.green,
-        blue: averageColor.blue
+        blue: averageColor.green
       };
     });
   }

@@ -160,11 +160,11 @@ function runKMeansHSV(){
   var kMeansHSVInputValue = parseInt($("#kmeansHSV-input").val());
 
   let kmeansHSVRunner = new KMeansHSVRunner();
-  let result = kmeansHSVRunner.run(kMeansHSVInputValue, pixels);
+  let results = kmeansHSVRunner.run(kMeansHSVInputValue, pixels);
 
   let kmeansHSVPlotter = new KMeansHSVPlotter();
-  kmeansHSVPlotter.plot("kmeansHSV-plot", result.clusters);
-  PaletteTableWriter.drawPaletteTable("#kmeansHSV-palette", result.clusters);
+  kmeansHSVPlotter.plot("kmeansHSV-plot", results.clusters);
+  PaletteTableWriter.drawPaletteTable("#kmeansHSV-palette", results.clusters);
 
   $("#kmeansHSV-output").show();
 }
