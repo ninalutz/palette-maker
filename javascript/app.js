@@ -157,13 +157,13 @@ function runKMeans(){
 function runKMeansHSV(){
   removePaletteTable("#kmeansHSV-palette");
   $("#kmeansHSV-output").hide();
-  var kMeansInputValue = parseInt($("#kmeansHSV-input").val());
+  var kMeansHSVInputValue = parseInt($("#kmeansHSV-input").val());
 
-  let kmeansRunner = new KMeansRunner();
-  let result = kmeansRunner.run(kMeansInputValue, pixels);
+  let kmeansHSVRunner = new KMeansHSVRunner();
+  let result = kmeansHSVRunner.run(kMeansHSVInputValue, pixels);
 
-  let kmeansPlotter = new KMeansPlotter();
-  kmeansPlotter.plot("kmeansHSV-plot", result.clusters);
+  let kmeansHSVPlotter = new KMeansHSVPlotter();
+  kmeansHSVPlotter.plot("kmeansHSV-plot", result.clusters);
   PaletteTableWriter.drawPaletteTable("#kmeansHSV-palette", result.clusters);
 
   $("#kmeansHSV-output").show();
